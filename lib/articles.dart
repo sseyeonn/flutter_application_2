@@ -1,3 +1,5 @@
+// articles.dart
+
 import 'package:http/http.dart' as http;
 // import 'package:flutter/foundation.dart';
 import 'dart:convert'; // json 사용 위함
@@ -9,7 +11,8 @@ class NewsService {
       {int page = 1,
       String country = 'us', // kr
       String category = '', // 날짜, 페이지 등 후에 다른 메소드들도 추가해줘야 함
-      String apiKey = 'c2e5f7b1f8ac44619f5776c178c9d5ea'}) async {
+      // String apiKey = 'c2e5f7b1f8ac44619f5776c178c9d5ea'}) async {
+      String apiKey = 'd34c82ee45ff40df9fdc2e6c8fce7b80'}) async {
     // 비동기 처리
     String url = 'https://newsapi.org/v2/top-headlines?';
     url += 'country=$country';
@@ -33,9 +36,11 @@ class NewsService {
       Map<String, dynamic> json = jsonDecode(response.body);
       List<dynamic> body = json['articles'];
 
+      // 이미지 없어도 출력하도록
       List<Article> articles =
           body.map((dynamic item) => Article.fromJson(item)).toList();
 
+      // 이미지 자료가 있어야만 나옴, 아니면 No Data 나타남
       // List<Article> articles = [];
       // for (var item in body) {
       //   if (await _isUrlValid(item['urlToImage'])) {
@@ -50,7 +55,7 @@ class NewsService {
   }
 
   // 유효한 url인지 - 인터넷 방문
-  Future<bool> _isUrlValid(String urlToImage) async {
+  Future<bool> _isUrlValid(String? urlToImage) async {
     try {
       // null 일 때
       if (urlToImage == null || urlToImage.isEmpty) {
@@ -68,13 +73,14 @@ class Article {
   // pure class
   final String title;
   final String description;
-  final String urlToImage;
+  final String? urlToImage;
   final String url;
 
   Article(
       {required this.title,
       required this.description,
-      required this.urlToImage,
+      this.urlToImage, // this.urlToImage,
+
       required this.url});
 
   factory Article.fromJson(Map<String, dynamic> json) {
