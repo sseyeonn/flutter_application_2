@@ -293,12 +293,13 @@ class _NewsPageState extends State<NewsPage> {
     // 언제 실행될지 모르는 비동기 async
     _currentPage++;
     List<Article> articles = await NewsService().fetchArticles(
-        page: _currentPage, category: _category, country: _country);
+        page: _currentPage,
+        category: _category,
+        country: _country); // 스크롤 내려도 나라, 카테고리 유지되도록 함
     // 바뀌었으면
     setState(() {
       _articles.addAll(articles); // 누적
       _isLoadingMore = false; // 더이상 스크롤 내려도 변화 없도록 false
-      // country 현재 나라로 유지되도록 수정 !!
     });
   }
 
@@ -306,6 +307,7 @@ class _NewsPageState extends State<NewsPage> {
   void _showModalBottomSheet(BuildContext context) {
     // ListTile 고쳤던 것처럼 county 탭 3개
     List<Map<String, String>> items = [
+      // 여기서 추가하면 나라별로 나타낼 수 있음
       {'title': 'USA', 'image': 'assets/us.webp', 'code': 'us'},
       {'title': 'KOREA', 'image': 'assets/kr.png', 'code': 'kr'},
       {'title': 'JAPAN', 'image': 'assets/jp.png', 'code': 'jp'},
@@ -315,8 +317,6 @@ class _NewsPageState extends State<NewsPage> {
       {'title': 'ARGENTINA', 'image': 'assets/ar.png', 'code': 'ar'},
       {'title': 'BRAZIL', 'image': 'assets/br.png', 'code': 'br'},
     ];
-
-// 001 159
 
     showModalBottomSheet(
         context: context, // showModal.. 빈 캔버스
@@ -373,7 +373,7 @@ class _NewsPageState extends State<NewsPage> {
         _showModalBottomSheet(context);
         break;
       case 1:
-        // Search
+        // Search 곧 추가
         break;
       case 2:
         Navigator.push(
