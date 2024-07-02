@@ -136,9 +136,9 @@ class _NewsPageState extends State<NewsPage> {
     } else if (_country == 'fr') {
       countryImage = 'assets/fr.png';
       countryName = 'France';
-    } else if (_country == 'ar') {
-      countryImage = 'assets/ar.png';
-      countryName = 'Argentina';
+    } else if (_country == 'de') {
+      countryImage = 'assets/de.png';
+      countryName = 'Germany';
     } else if (_country == 'br') {
       countryImage = 'assets/br.png';
       countryName = 'Brazil';
@@ -262,10 +262,14 @@ class _NewsPageState extends State<NewsPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: Image.asset(
-                countryImage,
-                width: 50,
-                height: 30,
+              icon: ClipRRect(
+                borderRadius: BorderRadius.circular(25.0),
+                child: Image.asset(
+                  countryImage,
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                ),
               ),
               // icon: Icon(Icons.public),
               label: '$countryName'), // 'Country'),
@@ -314,7 +318,7 @@ class _NewsPageState extends State<NewsPage> {
       {'title': 'CHINA', 'image': 'assets/cn.png', 'code': 'cn'},
       {'title': 'GREECE', 'image': 'assets/gr.jpg', 'code': 'gr'},
       {'title': 'FRANCE', 'image': 'assets/fr.png', 'code': 'fr'},
-      {'title': 'ARGENTINA', 'image': 'assets/ar.png', 'code': 'ar'},
+      {'title': 'GERMANY', 'image': 'assets/de.png', 'code': 'de'},
       {'title': 'BRAZIL', 'image': 'assets/br.png', 'code': 'br'},
     ];
 
@@ -323,12 +327,12 @@ class _NewsPageState extends State<NewsPage> {
         builder: (BuildContext context) {
           return Container(
             width: MediaQuery.of(context).size.width,
-            height: 250,
+            height: 150,
             color: Colors.white,
             child: GridView.count(
               crossAxisCount: 4,
-              crossAxisSpacing: 50.0,
-              mainAxisSpacing: 30.0,
+              crossAxisSpacing: 30.0,
+              mainAxisSpacing: 10.0,
               children: [
                 // Container 간단히 List 붙여서 나타내기
                 ...List.generate(items.length, (index) {
@@ -343,11 +347,14 @@ class _NewsPageState extends State<NewsPage> {
                           child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            items[index]['image']!,
-                            width: 50,
-                            height: 30,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(25.0),
+                            child: Image.asset(
+                              items[index]['image']!,
+                              width: 50,
+                              height: 40,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           Text(
                             items[index]['title']!,
