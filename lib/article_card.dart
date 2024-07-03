@@ -1,3 +1,5 @@
+// article_card.dart
+
 import 'package:flutter/material.dart';
 import 'articles.dart';
 import 'package:url_launcher/url_launcher.dart'; // 윈도우 설정 따로 (시스템 사양 차이)
@@ -18,9 +20,9 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, // 위에서부터 정렬
           children: [
-            (article.urlToImage.isNotEmpty)
+            (article.urlToImage != null && article.urlToImage!.isNotEmpty)
                 ? Image.network(
-                    article.urlToImage,
+                    article.urlToImage!,
                     width: double.infinity,
                     height: 200,
                     fit: BoxFit.cover,

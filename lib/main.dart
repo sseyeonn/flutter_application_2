@@ -1,5 +1,7 @@
 // 뉴스 어플리케이션 만들기
 
+// main.dart
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
